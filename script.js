@@ -6,15 +6,17 @@ let highScore = 0;
 let lost = false;
 let gameOver = false;
 
+const displayMessage = (message) => (document.querySelector('.message').textContent = message);
+
 document.querySelector('.check').addEventListener('click', function () {
 	const guess = Number(document.querySelector('.guess').value);
 
 	// Invalid input
 	if (!guess || guess < 1 || guess > 20) {
-		document.querySelector('.message').textContent = '⚠️ Valid Range: 1 - 20';
+		displayMessage('⚠️ Valid Range: 1 - 20');
 		// Player wins
 	} else if (guess === secretNumber) {
-		document.querySelector('.message').textContent = '🎉 Correct guess!';
+		displayMessage('🎉 Correct guess!');
 		gameOver = true;
 
 		if (score > highScore) {
@@ -30,10 +32,10 @@ document.querySelector('.check').addEventListener('click', function () {
 		}
 
 		if (lost) {
-			document.querySelector('.message').textContent = '💀 Game over!';
+			displayMessage('💀 Game over!');
 		} else {
 			const message = guess > secretNumber ? '📈 Too high!' : '📉 Too Low!';
-			document.querySelector('.message').textContent = message;
+			displayMessage(message);
 			score--;
 		}
 
@@ -59,8 +61,8 @@ document.querySelector('.again').addEventListener('click', function () {
 	lost = false;
 	gameOver = false;
 
+	displayMessage('Make a guess...');
 	document.querySelector('.guess').value = '';
-	document.querySelector('.message').textContent = 'Make a guess...';
 	document.querySelector('body').style.backgroundColor = '#222';
 	document.querySelector('.number').style.width = '15rem';
 	document.querySelector('.number').textContent = '?';
