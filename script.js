@@ -16,6 +16,7 @@ document.querySelector('.check').addEventListener('click', function () {
 		document.querySelector('body').style.backgroundColor = '#2a822a';
 		document.querySelector('.number').style.width = '20rem';
 		document.querySelector('.number').textContent = secretNumber;
+		document.querySelector('.check').disabled = true;
 		document.querySelector('.again').style.display = 'block';
 	} else {
 		// Wrong guess
@@ -23,6 +24,7 @@ document.querySelector('.check').addEventListener('click', function () {
 
 		if (lost) {
 			document.querySelector('.message').textContent = '💥 You lost the game!';
+			document.querySelector('.check').disabled = true;
 			document.querySelector('.again').style.display = 'block';
 		} else {
 			const message = guess > secretNumber ? '📈 Too high!' : '📉 Too Low!';
