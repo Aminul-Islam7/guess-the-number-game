@@ -2,21 +2,27 @@
 
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
+let highScore = 0;
 let lost = false;
 let gameOver = false;
 
 document.querySelector('.check').addEventListener('click', function () {
 	const guess = Number(document.querySelector('.guess').value);
 
+	// Invalid input
 	if (!guess || guess < 1 || guess > 20) {
-		// Invalid input
 		document.querySelector('.message').textContent = '⚠️ Valid Range: 1 - 20';
-	} else if (guess === secretNumber) {
 		// Player wins
+	} else if (guess === secretNumber) {
 		document.querySelector('.message').textContent = '🎉 Correct guess!';
 		gameOver = true;
-	} else {
+
+		if (score > highScore) {
+			highScore = score;
+			document.querySelector('.highscore').textContent = highScore;
+		}
 		// Wrong guess
+	} else {
 		if (score === 1) {
 			lost = true;
 			gameOver = true;
